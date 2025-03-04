@@ -18,10 +18,12 @@ func (sc *TradeInfoController) LastTradePrice(c *gin.Context) {
 	statusCode, lastVal, err := sc.TradeUsecase.GetLastTradePrice()
 	if err != nil {
 		c.JSON(statusCode, domain.ErrorResponse{Message: err.Error()})
+		return
 	}
 
 	if statusCode != http.StatusOK {
 		c.JSON(statusCode, domain.ErrorResponse{Message: err.Error()})
+		return
 	}
 
 	res := domain.LastTradeReponse{
@@ -31,5 +33,5 @@ func (sc *TradeInfoController) LastTradePrice(c *gin.Context) {
 			{Pair: "BTC/USD", Amount: lastVal["bitcoin"]["usd"]},
 		},
 	}
-	c.JSON(http.StatusOK, res)
+	c.JSON(statusCode, res)
 }

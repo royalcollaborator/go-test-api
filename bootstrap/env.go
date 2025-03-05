@@ -10,6 +10,10 @@ type Env struct {
 	AppEnv         string `mapstructure:"APP_ENV"`
 	ServerAddress  string `mapstructure:"SERVER_ADDRESS"`
 	ContextTimeout int    `mapstructure:"CONTEXT_TIMEOUT"`
+	RedisHost      string `mapstructure:"REDIS_HOST"`
+	RedisPort      string `mapstructure:"REDIS_PORT"`
+	RedisPassword  string `mapstructure:"REDIS_PASSWORD"`
+	CacheTTL       int    `mapstructure:"CACHE_TTL"`
 }
 
 func NewEnv() *Env {
@@ -29,6 +33,5 @@ func NewEnv() *Env {
 	if env.AppEnv == "development" {
 		log.Println("The App is running in development env")
 	}
-
 	return &env
 }
